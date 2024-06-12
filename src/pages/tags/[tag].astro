@@ -20,7 +20,7 @@ export async function getStaticPaths() {
       params: { tag },
       props: { posts: filteredPosts },
     };
-});
+  });
 }
 
 const { tag } = Astro.params;
