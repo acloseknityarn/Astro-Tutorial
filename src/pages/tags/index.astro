@@ -1,18 +1,21 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const allPosts = await Astro.glob("../posts/*.md");
+const allPosts = await getCollection("posts");
 
-const allTagsArrays = allPosts.map((post) => {
-  return post.frontmatter.tags
-})
+// const allTagsArrays = allPosts.map((post) => {
+//   return post.frontmatter.tags
+// })
 
-const allTags = allTagsArrays.flat()
+// const allTags = allTagsArrays.flat()
 
-const allUniqueTags = new Set(allTags)
+// const allUniqueTags = new Set(allTags)
 
-const tags = Array.from(allUniqueTags)
-// const tags = [...allUniqueTags]
+// const tags = Array.from(allUniqueTags)
+// // const tags = [...allUniqueTags]
+
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 
 const pageTitle = "Tag Index";
 ---
